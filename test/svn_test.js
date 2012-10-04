@@ -22,13 +22,23 @@ var grunt = require('grunt');
 
 exports['svn'] = {
   setUp: function(done) {
-    // setup here
     done();
   },
-  'helper': function(test) {
+  'parse_svninfo_helper': function(test) {
     test.expect(1);
-    // tests here
-    test.equal(grunt.helper('svn'), 'svn!!!', 'should return the correct value.');
+	var svnInfoAsString = "Path: .\n" + 
+	"Working Copy Root Path: C:\workspace\grunt-svn\n" + 
+	"URL: https://myDomain.com/svn/repo/project/trunk\n" + 
+	"Repository Root: https://myDomain.com/svn/repo\n" + 
+	"Repository UUID: 5b81218e-5263-406a-8320-3836ee58259e\n" + 
+	"Revision: 4472\n" + 
+	"Node Kind: directory\n" + 
+	"Schedule: normal\n" + 
+	"Last Changed Author: ophir\n" + 
+	"Last Changed Rev: 4402\n" + 
+	"Last Changed Date: 2012-09-05 12:52:12 +0300";
+	var svnInfo = grunt.helper('parse_svninfo', svnInfoAsString);
+    test.equal(svnInfo.Revision, 4472, 'should return the correct revision.');
     test.done();
   }
 };
