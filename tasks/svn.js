@@ -15,7 +15,7 @@ module.exports = function(grunt) {
   // TASKS
   // ==========================================================================
 
-  grunt.registerTask('svn_revision', 'Your task description goes here.', function() {
+  grunt.registerTask('svn_info', 'Your task description goes here.', function() {
 	var done = this.async();
 	grunt.utils.spawn({
 		cmd: 'svn',
@@ -26,28 +26,11 @@ module.exports = function(grunt) {
 			return done(false);
 		}
 		svnInfo = grunt.helper('parse_svninfo', result);
-		grunt.log.write(svnInfo.Revision);
+		grunt.config.set('svnInfo', svnInfo);
 		done();
 	});
   });
-  
-  grunt.registerHelper('svninfo', function(done) {
-		var svnInfo = {};
-		grunt.utils.spawn({
-			cmd: 'svn',
-			args: ['info']
-		}, function(err, result) {
-			if (err) {
-				grunt.log.error(err);
-				return done(false);
-			}
-			svnInfo = grunt.helper('parse_svninfo', result);
-			done();
-		});
-		grunt.log.writeln(svnInfo + svnInfo.Revision);
-		return svnInfo;
-   });
-   
+
    grunt.registerHelper('parse_svninfo', function(svnInfoAsString) {
 		var svnInfo = {};
 		infoLines = svnInfoAsString.split('\n');
