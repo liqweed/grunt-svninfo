@@ -27,7 +27,7 @@ exports['svn'] = {
   'parse_svninfo_helper': function(test) {
     test.expect(1);
 	var svnInfoAsString = "Path: .\n" + 
-	"Working Copy Root Path: C:\workspace\grunt-svn\n" + 
+	"Working Copy Root Path: C:/workspace/grunt-svn\n" +
 	"URL: https://myDomain.com/svn/repo/project/trunk\n" + 
 	"Repository Root: https://myDomain.com/svn/repo\n" + 
 	"Repository UUID: 5b81218e-5263-406a-8320-3836ee58259e\n" + 
