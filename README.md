@@ -17,28 +17,30 @@ One the plugin has been installed, it may be enabled inside your Gruntfile with 
 grunt.loadNpmTasks('grunt-svn');
 ```
 
+That's about it, no configuration necessary.
+
 ## The "svninfo" task
 
 ### Overview
 In your project's Gruntfile, add a section named `svninfo` to the data object passed into `grunt.initConfig()`.
 Executing the task `svninfo` would run `svn info` in the command line and would make the retrieved data available via grunt.config (e.g. `<%= svninfo.rev %>`) in your build.
+The resulting `svninfo` object has the following structure:
+
 
 ```js
-grunt.initConfig({
-  svn: { }
+{
+  "rev": " "321",
+  "url": "https://yourproject.unfuddle.com/svn/repo/trunk",
+  "last": {
+ 	  "rev": "321",
+ 	  "author": "me",
+ 	  "date": "2013-02-10 12:35:30 +0200"
   },
-})
-```
-
-### Usage Examples
-
-#### Default Options
-
-```js
-grunt.initConfig({
-  svn: { }
-  },
-})
+  "repository": {
+ 	  "root": "https://yourproject.unfuddle.com/svn/repo",
+ 	  "id": "f5d41312-1fa6-4ca6-a93e-e27d7e98fc43"
+  }
+}
 ```
 
 ```
