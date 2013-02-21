@@ -1,3 +1,5 @@
+'use strict';
+
 var grunt = require('grunt');
 
 /*
@@ -20,25 +22,27 @@ var grunt = require('grunt');
     test.ifError(value)
 */
 
-exports['svn'] = {
+exports.svn = {
   setUp: function(done) {
+    // setup here if necessary
     done();
   },
-  'parse_svninfo_helper': function(test) {
+  default_options: function(test) {
     test.expect(1);
-	var svnInfoAsString = "Path: .\n" + 
-	"Working Copy Root Path: C:/workspace/grunt-svn\n" +
-	"URL: https://myDomain.com/svn/repo/project/trunk\n" + 
-	"Repository Root: https://myDomain.com/svn/repo\n" + 
-	"Repository UUID: 5b81218e-5263-406a-8320-3836ee58259e\n" + 
-	"Revision: 4472\n" + 
-	"Node Kind: directory\n" + 
-	"Schedule: normal\n" + 
-	"Last Changed Author: ophir\n" + 
-	"Last Changed Rev: 4402\n" + 
-	"Last Changed Date: 2012-09-05 12:52:12 +0300";
-	var svnInfo = grunt.helper('parse_svninfo', svnInfoAsString);
-    test.equal(svnInfo.Revision, 4472, 'should return the correct revision.');
+
+    var actual = grunt.file.read('tmp/default_options');
+    var expected = grunt.file.read('test/expected/default_options');
+    test.equal(actual, expected, 'should describe what the default behavior is.');
+
     test.done();
-  }
+  },
+  custom_options: function(test) {
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/custom_options');
+    var expected = grunt.file.read('test/expected/custom_options');
+    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
+
+    test.done();
+  },
 };
