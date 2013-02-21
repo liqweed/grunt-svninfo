@@ -1,6 +1,6 @@
 #
-# * grunt-svn
-# * https://github.com/liqweed/grunt-svn
+# * grunt-svninfo
+# * https://github.com/liqweed/grunt-svninfo
 # *
 # * Copyright (c) 2013 liqweed
 # * Licensed under the MIT license.
