@@ -29,7 +29,7 @@ The resulting `svninfo` object has the following structure:
 
 ```js
 {
-  "rev": " "321",
+  "rev": "321",
   "url": "https://yourproject.unfuddle.com/svn/repo/trunk",
   "last": {
  	  "rev": "321",
