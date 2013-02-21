@@ -10,29 +10,29 @@ module.exports = (grunt) ->
 
   # Project configuration.
   grunt.initConfig
-    jshint:
-      all: ["Gruntfile.js", "tasks/*.js", "<%= nodeunit.tests %>"]
-      options:
-        jshintrc: ".jshintrc"
-
 
     # Before generating any new files, remove any previously-created files.
     clean:
       tests: ["tmp"]
 
-    # Configuration to be run (and then tested).
-    svninfo: {}
-
     # Unit tests.
     nodeunit:
       tests: ["test/*_test.js"]
 
+    coffeelint:
+      app: ['Gruntfile.coffee','tasks/*.coffee', 'test/*.coffee']
+      options:
+        'no_trailing_whitespace':
+          'level': 'error'
+        'max_line_length':
+          value: 100,
+          level: "warn"
 
   # Actually load this plugin's task(s).
   grunt.loadTasks "tasks"
 
   # These plugins provide necessary tasks.
-  grunt.loadNpmTasks "grunt-contrib-jshint"
+  grunt.loadNpmTasks "grunt-coffeelint"
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-nodeunit"
 
@@ -41,4 +41,4 @@ module.exports = (grunt) ->
   grunt.registerTask "test", ["clean", "svninfo", "nodeunit"]
 
   # By default, lint and run all tests.
-  grunt.registerTask "default", ["jshint", "test"]
+  grunt.registerTask "default", ["coffeelint"]
