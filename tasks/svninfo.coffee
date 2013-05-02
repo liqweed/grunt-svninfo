@@ -5,6 +5,9 @@
 # * Copyright (c) 2013 liqweed
 # * Licensed under the MIT license.
 #
+# 
+# require("child_process").spawn("svn",["info"],{cwd:"./test/fixtures/svninfo"}).stdout.on('data',function(data){ console.log(data.toString()); });
+
 "use strict"
 module.exports = (grunt) ->
 
@@ -12,13 +15,17 @@ module.exports = (grunt) ->
   # creation: http://gruntjs.com/creating-tasks
   grunt.registerTask "svninfo", "Get Subversion info from a working copy and populate grunt.config with the data", ->
     done = @async()
+    options = @options
+      cwd:"."
+    
     grunt.util.spawn
       cmd: "svn"
       args: ["info"]
+      opts: options
     , (err, result) ->
       if err
-        grunt.log.error err
-        return done(false)
+        grunt.log.warn err
+        return done()
       info = {}
       # Split SVN info by lines:
       result.stdout.split('\n').forEach (line) ->
