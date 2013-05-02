@@ -27,9 +27,6 @@ module.exports = (grunt) ->
         'max_line_length':
           value: 100,
           level: "warn"
-    svninfo:
-      options:
-        cwd:"test/fixtures/svninfo/"
 
   # Actually load this plugin's task(s).
   grunt.loadTasks "tasks"

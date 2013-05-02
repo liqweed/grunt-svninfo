@@ -27,7 +27,7 @@ exports.svn = {
     // setup here if necessary
     done();
   },
-  default_options: function(test) {
+  /*default_options: function(test) {
     test.expect(1);
 
     var actual = grunt.file.read('tmp/default_options');
@@ -42,6 +42,15 @@ exports.svn = {
     var actual = grunt.file.read('tmp/custom_options');
     var expected = grunt.file.read('test/expected/custom_options');
     test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
+
+    test.done();
+  },*/
+  known_rev: function(test) {
+    test.expect(1);
+
+    var actual = grunt.config.get('svninfo.rev');
+    var expected = 14;
+    test.equal(actual, expected, 'should return the rev of the defined repo');
 
     test.done();
   },
