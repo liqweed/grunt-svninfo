@@ -13,14 +13,14 @@ module.exports = (grunt) ->
 
   # Please see the Grunt documentation for more information regarding task
   # creation: http://gruntjs.com/creating-tasks
-  grunt.registerTask "svninfo", "Get Subversion info from a working copy and populate grunt.config with the data", ->
+  grunt.registerTask 'svninfo', 'Get Subversion info from a working copy and populate grunt.config with the data', ->
     done = @async()
     options = @options
-      cwd:"."
+      cwd: '.'
     
     grunt.util.spawn
-      cmd: "svn"
-      args: ["info"]
+      cmd: 'svn'
+      args: ['info']
       opts: options
     , (err, result) ->
       if err
@@ -29,7 +29,7 @@ module.exports = (grunt) ->
       info = {}
       # Split SVN info by lines:
       result.stdout.split('\n').forEach (line) ->
-        lineParts =line.split(": ")
+        lineParts =line.split(': ')
         if lineParts.length == 2
           # Populate info object
           info[lineParts[0]] = lineParts[1].trim()

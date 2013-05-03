@@ -53,5 +53,5 @@ exports.svn = {
     test.equal(actual, expected, 'should return the rev of the defined repo');
 
     test.done();
-  },
+  }
 };
