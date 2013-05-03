@@ -43,9 +43,27 @@ The resulting `svninfo` object has the following structure:
 }
 ```
 
+### Options
+
+#### cwd
+Type: `String`
+
+Allows to specify a cwd (current working directory) path for the SVN repository of which to retrieve the information. The default directory is the where you run grunt from (`'.'`).
+
+Example:
+``` js
+svninfo: {
+  options: {
+    cwd: './myproject/ishere'
+  },
+  ...
+}
+```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+0.1.2 - Support for 'cwd' option
+0.1.1 - Grunt 0.4.x compatibility
+0.1.0 - Initial release
