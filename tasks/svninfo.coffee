@@ -17,6 +17,7 @@ module.exports = (grunt) ->
     done = @async()
     options = @options
       cwd: '.'
+      output: 'svninfo'
     
     grunt.util.spawn
       cmd: 'svn'
@@ -35,7 +36,7 @@ module.exports = (grunt) ->
           info[lineParts[0]] = lineParts[1].trim()
 
       # Populate grunt.config with nicely parsed object:
-      grunt.config.set 'svninfo',
+      grunt.config.set options.output,
         rev: info['Revision']
         url: info['URL']
         last:
@@ -46,5 +47,5 @@ module.exports = (grunt) ->
           root: info['Repository Root']
           id: info['Repository UUID']
 
-      grunt.log.writeln "SVN info fetched (rev: #{grunt.config.get('svninfo.rev')})"
+      grunt.log.writeln "SVN info fetched (rev: #{grunt.config.get(options.output + '.rev')})"
       done()
