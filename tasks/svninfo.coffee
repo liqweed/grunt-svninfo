@@ -13,15 +13,19 @@ module.exports = (grunt) ->
 
   # Please see the Grunt documentation for more information regarding task
   # creation: http://gruntjs.com/creating-tasks
-  grunt.registerTask 'svninfo', 'Get Subversion info from a working copy and populate grunt.config with the data', ->
+  grunt.registerTask 'svninfo', 'Get Subversion info from a working copy and populate grunt.config with the data', (output, argsKey) ->
     done = @async()
     options = @options
       cwd: '.'
       output: 'svninfo'
+    options.output = output if output
+    args = options[argsKey or 'args']
+    
+    grunt.verbose.writeln("svninfo start: output - ", options.output, ", args - ", args)
     
     grunt.util.spawn
       cmd: 'svn'
-      args: ['info']
+      args: if args then ['info'].concat(args) else ['info']
       opts: options
     , (err, result) ->
       if err
