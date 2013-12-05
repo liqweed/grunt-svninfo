@@ -1,8 +1,0 @@
-node_modules
-npm-debug.log
-tmp
-.svn
-atlassian-ide-plugin.xml
-*.ipr
-*.iws
-*.iml

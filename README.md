@@ -121,6 +121,7 @@ grunt.registerTask("abcInfo", ["svninfo:abc:abcArgs"]);
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+ * 0.1.4 - Support for task arguments and args option (thanks to @gamtiq)
  * 0.1.3 - Support for a custom name for the info object (thanks to @solomojb)
  * 0.1.2 - Support for 'cwd' option (thanks to @richmarr)
  * 0.1.1 - Grunt 0.4.x compatibility

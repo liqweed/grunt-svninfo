@@ -49,7 +49,7 @@ exports.svn = {
     test.expect(1);
 
     var actual = grunt.config.get('svninfo.rev');
-    var expected = 14;
+    var expected = 25;
     test.equal(actual, expected, 'should return the rev of the defined repo');
 
     test.done();
