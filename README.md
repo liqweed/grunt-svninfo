@@ -65,6 +65,8 @@ Type: `String`
 
 Allows to specify a custom object that would contain the retrieved and parsed SVN info. Defaults to 'svninfo'. This feature came about to support projects with multiple external dependencies ("extenals"), in which each external would have its own info object instead of having them override each other with each 'info' call.
 
+Name of object can be redefined or specified by the first argument of task (see below).
+
 Example:
 ``` js
 svninfo: {
@@ -75,6 +77,45 @@ svninfo: {
 }
 ```
 
+#### args
+Type: `Array`
+
+Allows to specify options for `svn info` command (e.g. target, username, password etc).
+
+Example:
+``` js
+svninfo: {
+  options: {
+    args: ['http://some.svn-server.net/repo/project/trunk', '--username', 'name', '--password', 'pass']
+  },
+  ...
+}
+```
+
+It is possible to retrieve command options from other option instead of `args`.
+It can be done by using the second argument of task (see below).
+
+### Task arguments
+
+Two arguments can be passed to the task:
+
+1. Allows to specify a custom object that would contain the retrieved and parsed SVN info. This argument has priority over the `output` option.
+2. Allows to specify name of options field that contains list of command options. This argument has priority over the `args` option.
+
+Example: 
+``` js
+grunt.initConfig({
+  svninfo: {
+    options: {
+      abcArgs: ['http://some.svn-server.net/repo/abc/trunk', '--username', 'name', '--password', 'pass']
+    },
+    ...
+  }
+...
+grunt.registerTask("abcInfo", ["svninfo:abc:abcArgs"]);
+// or `grunt svninfo:abc:abcArgs` from command line
+});
+```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
