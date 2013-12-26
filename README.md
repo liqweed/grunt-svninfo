@@ -1,4 +1,4 @@
-# grunt-svninfo
+# grunt-svninfo [![Build Status](https://travis-ci.org/liqweed/grunt-svninfo.png?branch=master)](https://travis-ci.org/liqweed/grunt-svninfo) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 > A Grunt.js plugin that provides easy access to Subversion working copy metadata (svn info).
 
