@@ -5,7 +5,7 @@
 # * Copyright (c) 2013 liqweed
 # * Licensed under the MIT license.
 #
-# 
+#
 # require("child_process").spawn("svn",["info"],{cwd:"./test/fixtures/svninfo"}).stdout.on('data',function(data){ console.log(data.toString()); });
 
 "use strict"
@@ -13,7 +13,7 @@ module.exports = (grunt) ->
 
   # Please see the Grunt documentation for more information regarding task
   # creation: http://gruntjs.com/creating-tasks
-  grunt.registerTask 'svninfo', 'Get Subversion info from a working copy and populate grunt.config with the data', (output, argsKey) ->
+  grunt.registerTask 'svninfo','Get Subversion info from a working copy and populate grunt.config with the data', (output, argsKey) ->
     done = @async()
     options = @options
       cwd: '.'
@@ -25,31 +25,34 @@ module.exports = (grunt) ->
     
     grunt.util.spawn
       cmd: 'svn'
-      args: if args then ['info'].concat(args) else ['info']
+      args: if args then ['info', '--xml'].concat(args) else ['info', '--xml']
       opts: options
     , (err, result) ->
       if err
         grunt.log.warn err
         return done()
       info = {}
-      # Split SVN info by lines:
-      result.stdout.split('\n').forEach (line) ->
-        lineParts =line.split(': ')
-        if lineParts.length == 2
-          # Populate info object
-          info[lineParts[0]] = lineParts[1].trim()
+          
+      # Extract xml info with RegExp
+      revRE = /<entry[^>]+revision="([^"]*)"/
+      urlRE = /<url>([^<]*)<\/url>/
+      lastRevRE = /<commit[^>]+revision="([^"]*)"/
+      lastAuthorRE = /<author>([^<]*)<\/author>/
+      lastDateRE = /<date>([^<]*)<\/date>/
+      repoRootRE = /<root>([^<]*)<\/root>/
+      repoIdRE = /<uuid>([^<]*)<\/uuid>/
 
       # Populate grunt.config with nicely parsed object:
       grunt.config.set options.output,
-        rev: info['Revision']
-        url: info['URL']
+        rev: revRE.exec(result.stdout)[1]
+        url: urlRE.exec(result.stdout)[1]
         last:
-          rev: info['Last Changed Rev']
-          author: info['Last Changed Author']
-          date: info['Last Changed Date']
+          rev: lastRevRE.exec(result.stdout)[1]
+          author: lastAuthorRE.exec(result.stdout)[1]
+          date: lastDateRE.exec(result.stdout)[1]
         repository:
-          root: info['Repository Root']
-          id: info['Repository UUID']
+          root: repoRootRE.exec(result.stdout)[1]
+          id: repoIdRE.exec(result.stdout)[1]
 
       grunt.log.writeln "SVN info fetched (rev: #{grunt.config.get(options.output + '.rev')})"
       done()
