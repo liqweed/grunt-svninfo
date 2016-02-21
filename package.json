@@ -34,9 +34,12 @@
     "grunt": "~0.4.x"
   },
   "peerDependencies": {
-    "grunt": "~0.4.x"
+    "grunt": ">=0.4.0"
   },
   "keywords": [
-	  "gruntplugin", "svn", "subversion", "svninfo"
+    "gruntplugin",
+    "svn",
+    "subversion",
+    "svninfo"
   ]
 }
